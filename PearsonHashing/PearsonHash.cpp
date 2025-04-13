@@ -1,8 +1,8 @@
 #include "PearsonHash.h"
 
-std::string PearsonHash(std::string inputStr, int numOfBytesOut)
+std::vector<unsigned char> PearsonHash(std::vector<unsigned char> inputBytes, int numOfBytesOut)
 {
-    int T[256] = {
+    unsigned char T[256] = {
     134, 16, 182, 220, 189, 168, 97, 228, 119, 23, 98, 231, 163, 207, 103, 93,
     26, 108, 140, 203, 57, 105, 135, 42, 1, 113, 21, 13, 225, 87, 155, 248,
     200, 32, 61, 111, 128, 250, 243, 177, 38, 205, 48, 132, 185, 219, 79, 154,
@@ -21,14 +21,17 @@ std::string PearsonHash(std::string inputStr, int numOfBytesOut)
     166, 157, 160, 255, 130, 37, 221, 173, 186, 89, 253, 127, 91, 148, 100, 169
     };
 
-    std::string output;
+    std::vector<unsigned char> output;
 
-    for (int i = 0; i < numOfBytesOut; ++i) 
+    for (int i = 1; i <= numOfBytesOut; ++i) 
     {
-        char h_i = T[(inputStr[0] + i) % 256];
-        for (int j = 1; j < inputStr.size(); ++j)
+        unsigned char h_i = T[(inputBytes[0] + i) % 256];
+        for (int j = 1; j < inputBytes.size(); ++j)
         {
-            h_i = T[inputStr[j] xor h_i];
+            h_i = T[inputBytes[j] xor h_i];
         }
+        output.push_back(h_i);
     }
+
+    return output;
 }

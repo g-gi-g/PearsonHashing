@@ -1,4 +1,4 @@
 #pragma once
-#include <string>
+#include <vector>
 
-std::string PearsonHash(std::string *inputString, int numOfBytes);
+std::vector<unsigned char> PearsonHash(std::vector<unsigned char> inputBytes, int numOfBytesOut);
